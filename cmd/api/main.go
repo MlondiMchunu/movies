@@ -51,7 +51,7 @@ func main() {
 	}
 
 	//start HTTP server
-	logger.Printf("Starting %s server on port %d in %s mode", cfg.env, cfg.env, srv.Addr)
+	logger.Printf("Starting %s server on port %d", cfg.env, cfg.port)
 	err := srv.ListenAndServe()
 	logger.Fatal(err)
 }
