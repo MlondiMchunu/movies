@@ -30,4 +30,8 @@ func main() {
 	flag.Parse()
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
+
+	app := &application{
+		config: cfg,
+		logger: logger}
 }
