@@ -49,4 +49,9 @@ func main() {
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 30 * time.Second,
 	}
+
+	//start HTTP server
+	logger.Printf("Starting %s server on port %d in %s mode", cfg.env, cfg.env, srv.Addr)
+	err := srv.ListenAndServe()
+	logger.Fatal(err)
 }
