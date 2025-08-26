@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"log"
+	"os"
 )
 
 // declare string containing application version number
@@ -27,4 +28,6 @@ func main() {
 	flag.IntVar(&cfg.port, "port", 4000, "API server port")
 	flag.StringVar(&cfg.env, "env", "development", "Environment(development|staging|production)")
 	flag.Parse()
+
+	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
 }
