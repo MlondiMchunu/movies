@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"log"
+	"net/http"
 	"os"
 )
 
@@ -33,5 +34,10 @@ func main() {
 
 	app := &application{
 		config: cfg,
-		logger: logger}
+		logger: logger,
+	}
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/v1/healthcheck", app.healthCheckHandler)
+
 }
