@@ -11,7 +11,7 @@ func (app *application) routes() *httprouter.Router {
 	router := httprouter.New()
 
 	//register relevant methods, URL patterns and handler functions
-	router.Handler(http.MethodGet, "/v1/healthcheck", app.healthCheckHandler)
+	router.HandlerFunc(http.MethodGet, "/v1/healthcheck", app.healthCheckHandler)
 
 	return router
 }
