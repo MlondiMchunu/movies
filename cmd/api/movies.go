@@ -3,9 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"strconv"
-
-	"github.com/julienschmidt/httprouter"
 )
 
 func (app *application) createMovieHandler(res http.ResponseWriter, req *http.Request) {
@@ -13,9 +10,8 @@ func (app *application) createMovieHandler(res http.ResponseWriter, req *http.Re
 }
 
 func (app *application) showMovieHandler(res http.ResponseWriter, req *http.Request) {
-	params := httprouter.ParamsFromContext(req.Context())
 
-	id, err := strconv.ParseInt(params.ByName("id"), 10, 64)
+	id, err := app.readIDParam(req)
 	if err != nil || id < 1 {
 		http.NotFound(res, req)
 		return
