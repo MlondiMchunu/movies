@@ -55,3 +55,5 @@ func main() {
 	err := srv.ListenAndServe()
 	logger.Fatal(err)
 }
+
+//find . -name "*.go" | entr -r sh -c 'echo "== Restarting =="; go run ./cmd/api'
