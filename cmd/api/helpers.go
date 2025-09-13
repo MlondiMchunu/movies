@@ -25,4 +25,7 @@ func (app *application) witeJSON(res http.ResponseWriter, status int, data inter
 	if err != nil {
 		return err
 	}
+
+	//append new line to make it easier to view in terminal applications
+	js = append(js, '\n')
 }
