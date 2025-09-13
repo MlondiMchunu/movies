@@ -28,4 +28,13 @@ func (app *application) witeJSON(res http.ResponseWriter, status int, data inter
 
 	//append new line to make it easier to view in terminal applications
 	js = append(js, '\n')
+
+	for key, value := range headers {
+		res.Header()[key] = value
+	}
+	res.Header().Set("Content-Type", "application/json")
+	res.WriteHeader(status)
+	res.Write(js)
+
+	return nil
 }
