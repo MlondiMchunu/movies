@@ -23,6 +23,8 @@ func (app *application) healthCheckHandler(res http.ResponseWriter, req *http.Re
 		return
 	}
 
+	js = append(js, '\n')
+
 	res.Header().Set("Content-Type", "application/json")
 
 	res.Write([]byte(js))
