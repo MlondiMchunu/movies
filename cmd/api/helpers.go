@@ -20,7 +20,7 @@ func (app *application) readIDParam(req *http.Request) (int64, error) {
 	return id, nil
 }
 
-func (app *application) witeJSON(res http.ResponseWriter, status int, data interface{}, headers http.Header) error {
+func (app *application) writeJSON(res http.ResponseWriter, status int, data interface{}, headers http.Header) error {
 	js, err := json.Marshal(data)
 	if err != nil {
 		return err
