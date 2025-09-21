@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
+
+	"movies.mlo_dev.net/internal/data"
 )
 
 func (app *application) createMovieHandler(res http.ResponseWriter, req *http.Request) {
@@ -17,5 +20,12 @@ func (app *application) showMovieHandler(res http.ResponseWriter, req *http.Requ
 		return
 	}
 
-	fmt.Fprintf(res, "show the details of movie %d\n", id)
+	movie := data.Movie{
+		ID:        id,
+		CreatedAt: time.Now(),
+		Title:     "Casablanca",
+		Runtime:   102,
+		Genres:    []string{"drama", "romance", "war"},
+		Version:   1,
+	}
 }
