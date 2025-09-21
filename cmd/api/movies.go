@@ -28,4 +28,10 @@ func (app *application) showMovieHandler(res http.ResponseWriter, req *http.Requ
 		Genres:    []string{"drama", "romance", "war"},
 		Version:   1,
 	}
+
+	err = app.writeJSON(res, http.StatusOK, movie, nil)
+	if err != nil {
+		app.logger.Println(err)
+		http.Error(res, "The server encountered a problem and could not request", http.StatusInternalServerError)
+	}
 }
