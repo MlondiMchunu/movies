@@ -22,3 +22,7 @@ func (app *application) serverErrorResponse(res http.ResponseWriter, req *http.R
 	message := "server encountered a problem and could not process request"
 	app.errorResponse(res, req, http.StatusInternalServerError, message)
 }
+func (app *application) notFoundResponse(res http.ResponseWriter, req *http.Request) {
+	message := "the requested resource could not be found"
+	app.errorResponse(res, req, http.StatusNotFound, message)
+}
