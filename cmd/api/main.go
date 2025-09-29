@@ -20,6 +20,8 @@ type config struct {
 
 // define struct to hold dependencies for http handler, helpers, and middleware
 type application struct {
+	//config struct instance
+	cfg    config
 	config config
 	logger *log.Logger
 }
