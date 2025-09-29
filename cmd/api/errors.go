@@ -15,3 +15,10 @@ func (app *application) errorResponse(res http.ResponseWriter, req *http.Request
 		res.WriteHeader(500)
 	}
 }
+
+func (app *application) serverErrorResponse(res http.ResponseWriter, req *http.Request, err error) {
+	app.logError(req, err)
+
+	message := "server encountered a problem and could not process request"
+	app.errorResponse(res, req, http.StatusInternalServerError, message)
+}
