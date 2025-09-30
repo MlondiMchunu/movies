@@ -14,6 +14,8 @@ func (app *application) routes() *httprouter.Router {
 	//using http.HandlerFunc() adapter
 	router.NotFound = http.HandlerFunc(app.notFoundResponse)
 
+	router.MethodNotAllowed = http.HandlerFunc(app.methodNotAllowedResponse)
+
 	//register relevant methods, URL patterns and handler functions
 	router.HandlerFunc(http.MethodGet, "/v1/healthcheck", app.healthCheckHandler)
 	router.HandlerFunc(http.MethodPost, "/v1/movies", app.createMovieHandler)
