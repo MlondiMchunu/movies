@@ -45,6 +45,9 @@ func (app *application) readJSON(res http.ResponseWriter, req *http.Request, dst
 	// decode request body into target destination
 	err := json.NewDecoder(req.Body).Decode(dst)
 	if err != nil {
+		var syntaxError *json.SyntaxError
+		var unmarshalTypeError *json.UnmarshalTypeError
+		var invalidUnmarshalError *json.InvalidUnmarshalError
 
 	}
 }
