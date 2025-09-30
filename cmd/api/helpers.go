@@ -42,5 +42,9 @@ func (app *application) writeJSON(res http.ResponseWriter, status int, data enve
 }
 
 func (app *application) readJSON(res http.ResponseWriter, req *http.Request, dst interface{}) error {
+	// decode request body into target destination
+	err := json.NewDecoder(req.Body).Decode(dst)
+	if err != nil {
 
+	}
 }
