@@ -60,6 +60,22 @@ func (app *application) readJSON(res http.ResponseWriter, req *http.Request, dst
 
 		case errors.Is(err, io.ErrUnexpectedEOF):
 			return errors.New("body contains badly-formed JSON")
+
+		case errors.As(err, &unmarshalTypeError):
+			if unmarshalTypeError.Field != "" {
+				return fmt.Errorf("body contains incorrect JSON type of field %q", unmarshalTypeError.Field)
+			}
+			return fmt.Errorf("body contains incorrect JSON type (at character %d)", unmarshalTypeError.Offset)
+
+		case errors.Is(err, io.EOF):
+			return errors.New("body must not be empty")
+
+		case errors.As(err, &invalidUnmarshalError):
+			panic(err)
+
+		default:
+			return err
 		}
 	}
+	return nil
 }
