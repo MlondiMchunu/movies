@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -9,7 +8,15 @@ import (
 )
 
 func (app *application) createMovieHandler(res http.ResponseWriter, req *http.Request) {
-	fmt.Fprintln(res, "create a new movie")
+	//declare an anonymous struct to hold the info in http request body
+
+	var input struct {
+		Title   string   `json:"title"`
+		Year    int32    `json:"year"`
+		Runtime int32    `json:"runtime"`
+		Genres  []string `json:"genres"`
+	}
+
 }
 
 func (app *application) showMovieHandler(res http.ResponseWriter, req *http.Request) {
