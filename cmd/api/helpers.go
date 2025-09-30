@@ -40,3 +40,7 @@ func (app *application) writeJSON(res http.ResponseWriter, status int, data enve
 
 	return nil
 }
+
+func (app *application) readJSON(res http.ResponseWriter, req *http.Request, dst interface{}) error {
+
+}
