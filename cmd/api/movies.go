@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -25,6 +26,7 @@ func (app *application) createMovieHandler(res http.ResponseWriter, req *http.Re
 		app.errorResponse(res, req, http.StatusBadRequest, err.Error())
 		return
 	}
+	fmt.Fprintf(res, "%+v\n", input)
 
 }
 
