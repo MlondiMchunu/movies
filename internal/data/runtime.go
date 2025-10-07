@@ -19,3 +19,16 @@ func (r Runtime) MarshalJSON() ([]byte, error) {
 
 	return []byte(quotedJSONValue), nil
 }
+
+// UnmarshalJSON() method satisfies the
+// json.Unmarshaler interface
+func (r *Runtime) UnmarshalJSON(jsonValue []byte) error {
+
+	//remove surrounding double-quotes from string.
+	// If  unquoting isn't possible, then return
+	// ErrInvalidRuntimeFormat error.
+	unquotedJSONValue, err := strconv.Unquote(string(jsonValue))
+	if err != nil {
+		return ErrInvalidRuntimeFormat
+	}
+}
