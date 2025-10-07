@@ -47,7 +47,7 @@ func (app *application) writeJSON(res http.ResponseWriter, status int, data enve
 func (app *application) readJSON(res http.ResponseWriter, req *http.Request, dst interface{}) error {
 	//use http.MaxBytesReader() to limit the size of the request body to 1MB
 	maxBytes := 1_048_576
-	r.Body = http.MaxBytesReader(res, req.Body, int64(maxBytes))
+	req.Body = http.MaxBytesReader(res, req.Body, int64(maxBytes))
 
 	//initialize json.Decoder, and call the DisallowUnknownFields()
 	//method before decoding
