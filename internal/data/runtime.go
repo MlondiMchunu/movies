@@ -44,7 +44,7 @@ func (r *Runtime) UnmarshalJSON(jsonValue []byte) error {
 	if err != nil {
 		return ErrInvalidRuntimeFormat
 	}
-	*r = Riuntime(i)
+	*r = Runtime(i)
 
 	return nil
 }
