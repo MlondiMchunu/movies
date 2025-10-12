@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"movies.mlo_dev.net/internal/data"
+	"movies.mlo_dev.net/internal/validator"
 )
 
 func (app *application) createMovieHandler(res http.ResponseWriter, req *http.Request) {
@@ -23,6 +24,9 @@ func (app *application) createMovieHandler(res http.ResponseWriter, req *http.Re
 		app.badRequestResponse(res, req, err)
 		return
 	}
+
+	//Initialize a new Validator instance
+	v := validator.New()
 
 	fmt.Fprintf(res, "%+v\n", input)
 
