@@ -44,6 +44,11 @@ func (app *application) createMovieHandler(res http.ResponseWriter, req *http.Re
 	v.Check(len(input.Genres) <= 5, "genres", "must not contain more than 5 genres")
 	v.Check(validator.Unique(input.Genres), "genres", "must not contain duplicate values")
 
+	//verify if any of the validation checks failed
+	if !v.Valid() {
+		app.failedValidationResponse(res, req, v.Errors)
+		return
+	}
 	fmt.Fprintf(res, "%+v\n", input)
 
 }
