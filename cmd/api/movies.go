@@ -25,8 +25,12 @@ func (app *application) createMovieHandler(res http.ResponseWriter, req *http.Re
 		return
 	}
 
-	//Initialize a new Validator instance
+	//Initialize a new Validator
 	v := validator.New()
+
+	//use the Check() method to execute our validation checks
+	v.Check(input.Title != "", "title", "must be provided!")
+	v.Check(len(input.Title) <= 500, "title", "must not be more than 500 bytes long")
 
 	fmt.Fprintf(res, "%+v\n", input)
 
