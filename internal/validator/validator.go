@@ -29,7 +29,7 @@ func (v *Validator) AddError(key, message string) {
 	}
 }
 
-// Check adds an error message to the map if vlidation check is not ok
+// Check adds an error message to the map if validation check is not ok
 func (v *Validator) Check(ok bool, key, message string) {
 	if !ok {
 		v.AddError(key, message)
