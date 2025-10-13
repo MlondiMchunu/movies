@@ -1,6 +1,10 @@
 package data
 
-import "time"
+import (
+	"time"
+
+	"movies.mlo_dev.net/internal/validator"
+)
 
 type Movie struct {
 	ID        int64     `json:"id"`
@@ -10,4 +14,8 @@ type Movie struct {
 	Runtime   Runtime   `json:"runtime,omitempty"`
 	Genres    []string  `json:"genres,omitempty"`
 	Version   int32     `json:"version"`
+}
+
+func ValidateMovie(v *validator.Validator, movie *Movie) {
+	v.Chec(movie.Title != "", "title", "must be provided")
 }
