@@ -24,7 +24,7 @@ func (v *Validator) Valid() bool {
 
 // AddError adds an error message to the map
 func (v *Validator) AddError(key, message string) {
-	if __, exists := v.Errors[key]; !exists {
+	if _, exists := v.Errors[key]; !exists {
 		v.Errors[key] = message
 	}
 }
@@ -54,7 +54,7 @@ func Matches(value string, rx *regexp.Regexp) bool {
 func Unique(values []string) bool {
 	uniqueValues := make(map[string]bool)
 
-	for __, value := range values {
+	for _, value := range values {
 		uniqueValues[value] = true
 	}
 	return len(values) == len(uniqueValues)
