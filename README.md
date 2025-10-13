@@ -11,26 +11,28 @@ A RESTful API for managing a collection of movies, built with Go.
 
 ## Project Structure
 ```
-go.mod
-Makefile
-README.md
-bin/
-cmd/
-  api/
-    errors.go
-    healthcheck.go
-    helpers.go
-    main.go
-    movies.go
-    routes.go
-internal/
-  data/
-    movies.go
-    runtime.go
-  validator/
-    validator.go
-migrations/
-remote/
+.
+├── bin
+├── cmd
+│   └── api
+│       ├── errors.go
+│       ├── healthcheck.go
+│       ├── helpers.go
+│       ├── main.go
+│       ├── movies.go
+│       └── routes.go
+├── go.mod
+├── go.sum
+├── internal
+│   ├── data
+│   │   ├── movies.go
+│   │   └── runtime.go
+│   └── validator
+│       └── validator.go
+├── Makefile
+├── migrations
+├── README.md
+└── remote
 ```
 
 ## Getting Started
