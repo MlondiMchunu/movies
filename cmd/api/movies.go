@@ -25,6 +25,13 @@ func (app *application) createMovieHandler(res http.ResponseWriter, req *http.Re
 		return
 	}
 
+	movie := &data.Movie{
+		Title:   input.Title,
+		Year:    input.Year,
+		Runtime: input.Runtime,
+		Genres:  input.Genres,
+	}
+
 	//Initialize a new Validator
 	v := validator.New()
 
