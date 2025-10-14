@@ -10,7 +10,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
@@ -22,11 +21,7 @@ type config struct {
 	port int
 	env  string
 	db   struct {
-		user     string
-		password string
-		host     string
-		name     string
-		dsn      string
+		dsn string
 	}
 }
 
@@ -37,36 +32,19 @@ type application struct {
 }
 
 func main() {
-	// Load environment variables from .env file
-	err := godotenv.Load()
-	if err != nil {
-		log.Println("Warning: .env file not found or could not be loaded")
-	}
 
 	var cfg config
 
-	// Read environment variables
-	cfg.port = 4000
-	if portEnv := os.Getenv("PORT"); portEnv != "" {
-		fmt.Sscanf(portEnv, "%d", &cfg.port)
-	}
-	cfg.env = os.Getenv("ENV")
-	if cfg.env == "" {
-		cfg.env = "development"
-	}
-	cfg.db.user = os.Getenv("DB_USER")
-	cfg.db.password = os.Getenv("DB_PASSWORD")
-	cfg.db.host = os.Getenv("DB_HOST")
-	cfg.db.name = os.Getenv("DB_NAME")
+	port := os.Getenv("PORT")
+	db_user := os.Getenv("DB_USER")
+	db_password := os.Getenv("DB_PASSWORD")
+	dsn := os.Getenv("DSN")
 
-	// Build DSN from env variables if present
-	if cfg.db.user != "" && cfg.db.password != "" && cfg.db.host != "" && cfg.db.name != "" {
-		cfg.db.dsn = fmt.Sprintf("postgres://%s:%s@%s/%s", cfg.db.user, cfg.db.password, cfg.db.host, cfg.db.name)
-	} else if dsn := os.Getenv("DB_DSN"); dsn != "" {
-		cfg.db.dsn = dsn
-	} else {
-		cfg.db.dsn = "postgres://greenlight:pa$$word@localhost/greenlight"
-	}
+	flag.IntVar(&cfg.port, "port", 4000, "API server port")
+	flag.StringVar(&cfg.env, "env", "development", "Environment (development|staging|production)")
+
+	//Read the DSN from the db-dsn command-line flag into the config struct
+	flag.StringVar(&cfg.db.dsn, "db-dsn", "postgres://greenlight:"+db_password+"@localhost/"+db_user, "PostgreSQL DSN")
 
 	flag.Parse()
 
