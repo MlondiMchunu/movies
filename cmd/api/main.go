@@ -35,16 +35,13 @@ func main() {
 
 	var cfg config
 
-	port := os.Getenv("PORT")
-	db_user := os.Getenv("DB_USER")
-	db_password := os.Getenv("DB_PASSWORD")
 	dsn := os.Getenv("DSN")
 
 	flag.IntVar(&cfg.port, "port", 4000, "API server port")
 	flag.StringVar(&cfg.env, "env", "development", "Environment (development|staging|production)")
 
 	//Read the DSN from the db-dsn command-line flag into the config struct
-	flag.StringVar(&cfg.db.dsn, "db-dsn", "postgres://greenlight:"+db_password+"@localhost/"+db_user, "PostgreSQL DSN")
+	flag.StringVar(&cfg.db.dsn, "db-dsn", dsn, "PostgreSQL DSN")
 
 	flag.Parse()
 
