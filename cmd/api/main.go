@@ -101,7 +101,13 @@ func openDB(cfg config) (*sql.DB, error) {
 	}
 
 	db.SetMaxOpenConns(cfg.db.maxOpenConns)
+
 	db.SetMaxIdleConns(cfg.db.maxIdleConns)
+
+	duration, err := time.ParseDuration(cfg.db.maxIdleTime)
+	if err != nil {
+		return nil, err
+	}
 
 	//create a context with S-second timeout deadline.
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
