@@ -102,4 +102,4 @@ func openDB(cfg config) (*sql.DB, error) {
 	return db, nil
 }
 
-//find . -name "*.go" | entr -r sh -c 'echo "== Restarting =="; go run ./cmd/api'
+//find . -name "*.go" | entr -r sh -c 'echo "== Restarting =="; go run ./cmd/api -db-dsn 'user=greenlight password=pa$$word host=localhost dbname=greenlight sslmode=disable''
