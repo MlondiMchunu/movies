@@ -41,13 +41,13 @@ func main() {
 
 	var cfg config
 
-	dsn := os.Getenv("DSN")
+	cfg.db.dsn = os.Getenv("DSN")
 
 	flag.IntVar(&cfg.port, "port", 4000, "API server port")
 	flag.StringVar(&cfg.env, "env", "development", "Environment (development|staging|production)")
 
 	//Read the DSN from the db-dsn command-line flag into the config struct
-	flag.StringVar(&cfg.db.dsn, "db-dsn", dsn, "PostgreSQL DSN")
+	flag.StringVar(&cfg.db.dsn, "db-dsn", cfg.db.dsn, "PostgreSQL DSN")
 
 	// read the connection pool settings from commandline flags into the config struct
 	flag.IntVar(&cfg.db.maxOpenConns, "db-max-open-conns", 25, "PostgreSQL max open connections")
@@ -99,6 +99,8 @@ func openDB(cfg config) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	db.SetMaxOpenConns(cfg.db.maxOpenConns)
 
 	//create a context with S-second timeout deadline.
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
