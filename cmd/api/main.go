@@ -49,6 +49,11 @@ func main() {
 	//Read the DSN from the db-dsn command-line flag into the config struct
 	flag.StringVar(&cfg.db.dsn, "db-dsn", dsn, "PostgreSQL DSN")
 
+	// read the connection pool settings from commandline flags into the config struct
+	flag.IntVar(&cfg.db.maxOpenConns, "db-max-open-conns", 25, "PostgreSQL max open connections")
+	flag.IntVar(&cfg.db.maxIdleConns, "db-max-idle-conns", 25, "PostgreSQL max idle connections")
+	flag.StringVar(&cfg.db.maxIdleTime, "db-max-idle-time", "15m", "PostgreSQL max connection idle time")
+
 	flag.Parse()
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
